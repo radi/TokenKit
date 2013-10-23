@@ -4,7 +4,7 @@ Bare-bones token field built with a collection view.
 
 ## Using TokenKit
 
-To use Token Kit, you’ll incorporate `TKTokenField` which manages an internal UICollectionView to show one cell for each token. Pass in `tokens` and modify them thru `-setTokens:animated:`. If you’re interested in handling token cell selection, you can assign a delegate and operate on `selectedTokens` or modify these thru `-setSelectedTokens:animated:`.
+To use Token Kit, you’ll incorporate `TKTokenField` which manages an internal UICollectionView to show one cell for each token. Pass in `tokens` and modify them thru `-setTokens:animated:completion:`. If you’re interested in handling token cell selection, you can assign a delegate and operate on `selectedTokens` or modify these thru `-setSelectedTokens:animated:`.
 
 Additional methods on the token field are provided for flexibility, and there is a `TKDynamicTokenField` which allows the user to pick one or several tokens from a predefined list. This implementation uses `UIPopoverController`, so it is only available for the iPad.
 
