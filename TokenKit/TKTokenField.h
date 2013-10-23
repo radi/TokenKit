@@ -15,7 +15,7 @@
 @interface TKTokenField : UIView
 @property (nonatomic, readwrite, weak) IBOutlet id<TKTokenFieldDelegate> delegate;
 @property (nonatomic, readwrite, strong) NSArray *tokens;
-- (void) setTokens:(NSArray *)tokens animated:(BOOL)animated;
+- (void) setTokens:(NSArray *)tokens animated:(BOOL)animated completion:(void(^)(BOOL finished))block;
 
 @property (nonatomic, readwrite, strong) NSSet *selectedTokens;
 - (void) setSelectedTokens:(NSSet *)selectedTokens animated:(BOOL)animate;

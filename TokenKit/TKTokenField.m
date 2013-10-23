@@ -32,10 +32,10 @@
 }
 
 - (void) setTokens:(NSArray *)tokens {
-	[self setTokens:tokens animated:NO];
+	[self setTokens:tokens animated:NO completion:nil];
 }
 
-- (void) setTokens:(NSArray *)tokens animated:(BOOL)animated {
+- (void) setTokens:(NSArray *)tokens animated:(BOOL)animated completion:(void (^)(BOOL))block {
 	if (_tokens != tokens) {
 		UICollectionView *collectionView = self.collectionView;
 		NSMutableSet *selectedTokens = [self.selectedTokens mutableCopy];
@@ -47,6 +47,9 @@
       [self didChangeValueForKey:@"tokens"];
 			[collectionView reloadData];
 			self.selectedTokens = selectedTokens;
+			if (block) {
+				block(YES);
+			}
 			return;
 		}
 		
@@ -97,6 +100,9 @@
       [self didChangeValueForKey:@"tokens"];
 		} completion:^(BOOL finished) {
 			self.selectedTokens = selectedTokens;
+			if (block) {
+				block(finished);
+			}
 		}];
 	}
 }
