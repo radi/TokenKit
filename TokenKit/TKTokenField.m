@@ -91,18 +91,23 @@
 			return answer;
 		})());
 		
-		[firstResponder(collectionView) resignFirstResponder];
+		NSArray *fromTokens = _tokens;
+		NSArray *toTokens = tokens;
+		
+		[firstResponder(collectionView.window) resignFirstResponder];
 		[collectionView performBatchUpdates:^{
 			[collectionView deleteItemsAtIndexPaths:deletedIndexPaths];
 			[collectionView insertItemsAtIndexPaths:insertedIndexPaths];
-      [self willChangeValueForKey:@"tokens"];
 			_tokens = tokens;
-      [self didChangeValueForKey:@"tokens"];
 		} completion:^(BOOL finished) {
 			self.selectedTokens = selectedTokens;
 			if (block) {
 				block(finished);
 			}
+			_tokens = fromTokens;
+			[self willChangeValueForKey:@"tokens"];
+			_tokens = toTokens;
+			[self didChangeValueForKey:@"tokens"];
 		}];
 	}
 }
