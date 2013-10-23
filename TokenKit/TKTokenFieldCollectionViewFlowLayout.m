@@ -5,6 +5,10 @@
 //	Portions of this file comes from:
 //	http://stackoverflow.com/questions/13017257/how-do-you-determine-spacing-between-cells-in-uicollectionview-flowlayout
 
+- (BOOL) shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+	return YES;
+}
+
 - (NSArray *) layoutAttributesForElementsInRect:(CGRect)rect {
 	NSArray *answer = [super layoutAttributesForElementsInRect:rect];
 	for (UICollectionViewLayoutAttributes *attributes in answer) {
