@@ -26,11 +26,24 @@
 	return answer;
 }
 
+- (void) configureAdditionCell:(UICollectionViewCell *)cell {
+	if ([self remainingTokens].count) {
+		cell.userInteractionEnabled = YES;
+		cell.contentView.alpha = 1.0f;
+		cell.backgroundView.alpha = 1.0f;
+	} else {
+		cell.userInteractionEnabled = NO;
+		cell.contentView.alpha = 0.25f;
+		cell.backgroundView.alpha = 0.25f;
+	}
+}
+
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
 		if (indexPath.item == self.tokens.count) {
 			UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:TKDynamicTokenFieldAdditionCellReuseIdentifier forIndexPath:indexPath];
 			[cell setValue:TKDynamicTokenFieldAdditionCellReuseIdentifier forKey:@"reuseIdentifier"];
+			[self configureAdditionCell:cell];
 			return cell;
 		}
 	}
