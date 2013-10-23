@@ -31,13 +31,6 @@
 	[self addSubview:self.collectionView];
 }
 
-//- (NSArray *) tokens {
-//	if (!_tokens) {
-//		_tokens = @[];
-//	}
-//	return _tokens;
-//}
-
 - (void) setTokens:(NSArray *)tokens {
 	[self setTokens:tokens animated:NO];
 }
@@ -49,7 +42,9 @@
 		[selectedTokens intersectSet:[NSSet setWithArray:tokens]];
 		
 		if (!animated) {
+      [self willChangeValueForKey:@"tokens"];
 			_tokens = tokens;
+      [self didChangeValueForKey:@"tokens"];
 			[collectionView reloadData];
 			self.selectedTokens = selectedTokens;
 			return;
@@ -97,7 +92,9 @@
 		[collectionView performBatchUpdates:^{
 			[collectionView deleteItemsAtIndexPaths:deletedIndexPaths];
 			[collectionView insertItemsAtIndexPaths:insertedIndexPaths];
+      [self willChangeValueForKey:@"tokens"];
 			_tokens = tokens;
+      [self didChangeValueForKey:@"tokens"];
 		} completion:^(BOOL finished) {
 			self.selectedTokens = selectedTokens;
 		}];
